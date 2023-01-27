@@ -37,7 +37,7 @@ library(knitr)
 data_fastfood_sales <- read_csv(here::here("data","raw_data","data_fastfood_sales.csv"))
 ```
 
-## Problem 1
+### Problem 1
 
 ``` r
 knitr::include_graphics(here::here("images", "problem_1.jpg"))
@@ -60,7 +60,7 @@ data_fastfood_sales %>% mutate(proportion = num_franchised_stores / unit_count) 
 ```
 
 <img src="Visualizing-Data-in-the-Tidyverse-Course-Project_files/figure-gfm/unnamed-chunk-4-1.png" width="115%" height="115%" />
-\## Problem 2
+\### Problem 2
 
 ``` r
 knitr::include_graphics(here::here("images", "problem_2.jpg"))

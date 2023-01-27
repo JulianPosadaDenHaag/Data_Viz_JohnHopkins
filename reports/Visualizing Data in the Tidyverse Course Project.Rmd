@@ -38,7 +38,7 @@ data_fastfood_sales <- read_csv(here::here("data","raw_data","data_fastfood_sale
 
 ```
 
-## Problem 1
+### Problem 1
 
 ```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_1.jpg"))
@@ -60,7 +60,7 @@ data_fastfood_sales %>% mutate(proportion = num_franchised_stores / unit_count) 
   geom_point(aes(color = proportion)) +
   theme_light()
 ```
-## Problem 2
+### Problem 2
 
 ```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_2.jpg"))
