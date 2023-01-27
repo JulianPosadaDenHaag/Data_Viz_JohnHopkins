@@ -1,25 +1,25 @@
-Visualizing Data in the Tidyverse
-================
-Julian Posada
-2023-01-26
+---
+title: "Visualizing Data in the Tidyverse"
+author: "Julian Posada"
+date: "2023-01-26"
+output: output=github_document
+---
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+ 
 ### Johns Hopkins University
-
 ### Tidyverse Skills for Data Science in R Specialization
-
 ### Course Project
-
-### Data sets:
-
-#### Data set: annual sales information and number of stores per fast food restaurants in 2018 (data_fastfood_sales.csv) \[858b\]
-
-#### Data set: nutrition information about entrees from fast food restaurants (data_fastfood_calories.csv) \[50Kb\]
-
-#### Source: Data originally from the [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-09-04) from the Tidy Tuesday project in R4DS online learning community
-
+### Data sets: 
+#### Data set: annual sales information and number of stores per fast food restaurants in 2018 (data_fastfood_sales.csv) [858b]
+#### Data set: nutrition information about entrees from fast food restaurants (data_fastfood_calories.csv) [50Kb]
+#### Source: Data originally from the [GitHub repository ](https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-09-04) from the Tidy Tuesday project in R4DS online learning community
 ### MIT licensed
 
-``` r
+```{r message=FALSE, warning=FALSE}
 #Loading the libraries that are needed for the whole project. 
 library(readr)
 library(visdat)
@@ -32,20 +32,22 @@ library(scales)
 library(knitr)
 ```
 
-``` r
+```{r message=FALSE, warning=FALSE}
 #using the library here and readr to load a csv into a data frame
 data_fastfood_sales <- read_csv(here::here("data","raw_data","data_fastfood_sales.csv"))
+
 ```
 
 ### Problem 1
 
-``` r
+```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_1.jpg"))
 ```
 
-<img src="images/problem_1.jpg" width="115%" height="115%" />
 
-``` r
+
+
+```{r message=FALSE, warning=FALSE, out.width="115%", out.height="115%"}
 data_fastfood_sales %>% mutate(proportion = num_franchised_stores / unit_count) %>% 
   ggplot(aes(x = us_sales, y = unit_count)) + 
   geom_point()+                         # it creates a scatter plot
@@ -58,17 +60,13 @@ data_fastfood_sales %>% mutate(proportion = num_franchised_stores / unit_count) 
   geom_point(aes(color = proportion)) +
   theme_light()
 ```
+### Problem 2
 
-<img src="Visualizing-Data-in-the-Tidyverse-Course-Project_files/figure-gfm/unnamed-chunk-4-1.png" width="115%" height="115%" />
-\### Problem 2
-
-``` r
+```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_2.jpg"))
 ```
 
-<img src="images/problem_2.jpg" width="115%" height="115%" />
-
-``` r
+```{r message=FALSE, warning=FALSE, out.width="80%"}
 data_fastfood_sales %>% 
   ggplot(aes(label = label_dollar()(ceiling(average_sales)),  
              x = average_sales, 
@@ -82,23 +80,18 @@ data_fastfood_sales %>%
   coord_cartesian(xlim= c(0,2800))
 ```
 
-<img src="Visualizing-Data-in-the-Tidyverse-Course-Project_files/figure-gfm/unnamed-chunk-6-1.png" width="80%" />
-
 ### Problem 3
 
-``` r
+```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_3.jpg"))
 ```
 
-<img src="images/problem_3.jpg" width="115%" height="115%" />
-
-``` r
+```{r message=FALSE, warning=FALSE}
 data_fastfood_calories <- read_csv(here::here("data","raw_data", "data_fastfood_calories.csv"))
 #vis_dat(data_fastfood_calories)
 #skim(data_fastfood_calories)
 ```
-
-``` r
+```{r , out.height = "150%"}
 data_fastfood_calories%>% 
   ggplot(aes(x = calories, y = sodium,
              label = item))+ 
@@ -122,17 +115,13 @@ data_fastfood_calories%>%
   scale_y_continuous(breaks = seq(0, 6000, by = 2000))
 ```
 
-<img src="Visualizing-Data-in-the-Tidyverse-Course-Project_files/figure-gfm/unnamed-chunk-9-1.png" height="150%" />
-
 ### Problem 4
-
-``` r
+```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_4.jpg"))
 ```
 
-<img src="images/problem_4.jpg" width="115%" height="115%" />
 
-``` r
+```{r}
 data_fastfood_calories%>% 
   mutate(salad = str_detect(item, "Salad")) %>% 
   mutate(salad = case_when(salad ~  "Salad",
@@ -152,17 +141,13 @@ data_fastfood_calories%>%
   theme_light()
 ```
 
-![](Visualizing-Data-in-the-Tidyverse-Course-Project_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
-
 ### Problem 5
-
-``` r
+```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "problem_5.jpg"))
 ```
 
-<img src="images/problem_5.jpg" width="115%" height="115%" />
 
-``` r
+```{r message=FALSE, warning=FALSE}
 df_sugar_filtered <- data_fastfood_calories%>% 
   filter(restaurant != "Taco Bell") %>% 
   select(restaurant,item,sugar) %>% 
@@ -190,11 +175,6 @@ df_us_sales_vs_sugar %>%
   xlab("Restaurant")+
   labs(fill = "Median sugar (grams)\nin fast food entrees?")
 ```
-
-![](Visualizing-Data-in-the-Tidyverse-Course-Project_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
-
-``` r
+```{r, out.width="115%", out.height="115%"}
 knitr::include_graphics(here::here("images", "palette.jpg"))
 ```
-
-<img src="images/palette.jpg" width="115%" height="115%" />
